@@ -1,5 +1,15 @@
 <template>
   <div class="image-previewer">
+    <indicator
+      :dir="ARROW_DIRECTION.LEFT"
+      @handle-image-slide="handleImageSlide"
+    ></indicator>
+
+    <indicator
+      :dir="ARROW_DIRECTION.RIGHT"
+      @handle-image-slide="handleImageSlide"
+    ></indicator>
+
     <!-- slider设置容纳所有图片的最大宽度 -->
     <div class="slider" :style="{ width: sliderWidth + 'px' }">
       <image-container v-for="item in data" :item="item"> </image-container>
@@ -8,8 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { IImageData } from "./types";
+import { ARROW_DIRECTION, type IImageData } from "./types";
 import ImageContainer from "./ImageContainer.vue";
+import Indicator from "./Indicator.vue";
 
 const props = defineProps<{
   data: IImageData[];
@@ -20,6 +31,10 @@ console.log("props=>", props);
 const imgLength = props.data.length;
 // 所有图片平铺所占用的宽度
 const sliderWidth = imgLength * 440;
+
+const handleImageSlide = (dir: ARROW_DIRECTION) => {
+  console.log("dir:", dir);
+};
 </script>
 
 <style lang="scss" scoped>

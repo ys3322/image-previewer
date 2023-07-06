@@ -4,3 +4,8 @@ export interface IImageData {
   rotate: Number;
   scale: Number;
 }
+// 左右方向枚举类型
+export enum ARROW_DIRECTION {
+  LEFT = "left",
+  RIGHT = "right",
+}
