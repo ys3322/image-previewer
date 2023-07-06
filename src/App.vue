@@ -27,6 +27,7 @@ header {
 }
 main {
   height: calc(100vh - var(--header-height));
+  overflow-y: auto;
   background-color: var(--normal-bg);
 }
 

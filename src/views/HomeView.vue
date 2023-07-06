@@ -10,25 +10,25 @@ import ImagePreviewer from "../components/image-previewer/index.vue";
 const data = [
   {
     id: 1,
-    image: "1.jpeg",
+    image: "image1.jpg",
     rotate: 0,
     scale: 1,
   },
   {
     id: 2,
-    image: "2.jpeg",
+    image: "image2.jpg",
     rotate: 0,
     scale: 1,
   },
   {
     id: 3,
-    image: "3.jpeg",
+    image: "image3.jpg",
     rotate: 0,
     scale: 1,
   },
   {
     id: 4,
-    image: "4.jpeg",
+    image: "image4.jpg",
     rotate: 0,
     scale: 1,
   },
