@@ -14,6 +14,7 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 .image-container {
+  float: left;
   width: 440px;
   height: 252px;
   img {

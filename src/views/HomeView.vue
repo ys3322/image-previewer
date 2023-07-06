@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <image-previewer :data="data"></image-previewer>
   </div>
 </template>
