@@ -1,8 +1,8 @@
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 import { ARROW_DIRECTION, ZOOM, type IImageData } from "./types";
 
 // 操作slider当前索引值的hook
-export const useSliderIndex = (imgLength: number) => {
+export const useSliderIndex = (imgLength: Ref) => {
   const currentIndex = ref(0);
 
   // 根据左右方向切换当前的索引
@@ -11,10 +11,10 @@ export const useSliderIndex = (imgLength: number) => {
 
     switch (dir) {
       case ARROW_DIRECTION.LEFT:
-        currentIndex.value = index <= 0 ? imgLength - 1 : index - 1;
+        currentIndex.value = index <= 0 ? imgLength.value - 1 : index - 1;
         break;
       case ARROW_DIRECTION.RIGHT:
-        currentIndex.value = index >= imgLength - 1 ? 0 : index + 1;
+        currentIndex.value = index >= imgLength.value - 1 ? 0 : index + 1;
         break;
 
       default:

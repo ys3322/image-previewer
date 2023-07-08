@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { ARROW_DIRECTION, ZOOM, type IImageData } from "./types";
 import ImageContainer from "./ImageContainer.vue";
 import Indicator from "./Indicator.vue";
@@ -45,9 +45,9 @@ const props = defineProps<{
 
 console.log("props=>", props);
 
-const imgLength = props.data.length;
+const imgLength = computed(() => props.data.length);
 // 所有图片平铺所占用的宽度
-const sliderWidth = imgLength * 440;
+const sliderWidth = imgLength.value * 440;
 
 // ============== 初始化hooks ==============
 const {
