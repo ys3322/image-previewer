@@ -9,3 +9,7 @@ export enum ARROW_DIRECTION {
   LEFT = "left",
   RIGHT = "right",
 }
+export enum ZOOM {
+  OUT = "out",
+  IN = "in",
+}

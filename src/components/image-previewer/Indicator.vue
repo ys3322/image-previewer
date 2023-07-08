@@ -36,7 +36,8 @@ const handleImageSlide = (dir: ARROW_DIRECTION) => {
   transition: text-shadow 0.3s;
 
   &:hover {
-    text-shadow: 1px 3px 3px #000;
+    // text-shadow: 1px 3px 3px #000;
+    color: #eee;
   }
 
   &.icon-arrow-left {

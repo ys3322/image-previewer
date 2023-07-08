@@ -11,6 +11,12 @@
       @handle-image-slide="handleImageSlide"
     ></indicator>
 
+    <!-- 控制条 -->
+    <control-bar
+      @handle-rotate="handleRotate"
+      @handle-zoom="handleZoom"
+    ></control-bar>
+
     <!-- 设置容纳所有图片的最大宽度，并根据当前的index，控制左右移动 -->
     <div
       class="slider"
@@ -19,20 +25,22 @@
         transform: `translateX(-${currentIndex * 440}px)`,
       }"
     >
-      <image-container v-for="item in data" :item="item"> </image-container>
+      <image-container v-for="item in imageData" :item="item">
+      </image-container>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { ARROW_DIRECTION, type IImageData } from "./types";
+import { ARROW_DIRECTION, ZOOM, type IImageData } from "./types";
 import ImageContainer from "./ImageContainer.vue";
 import Indicator from "./Indicator.vue";
-import { useSliderIndex } from "./hooks";
+import ControlBar from "./ControlBar.vue";
+import { useImageData, useSliderIndex } from "./hooks";
 
 const props = defineProps<{
-  data: IImageData[];
+  data: IImageData[]; // 传递进来的props，不可以修改。下面通过useImageDate变成响应式数据
 }>();
 
 console.log("props=>", props);
@@ -41,12 +49,33 @@ const imgLength = props.data.length;
 // 所有图片平铺所占用的宽度
 const sliderWidth = imgLength * 440;
 
-const { currentIndex, setCurrentIndex } = useSliderIndex(imgLength);
+// ============== 初始化hooks ==============
+const {
+  imageData,
+  setImageItemRotate,
+  setImageItemZoom,
+  resetImageItemStatus,
+} = useImageData(props.data);
+
+const { currentIndex, setCurrentIndexByDir } = useSliderIndex(imgLength);
+
+// ============== slider左右点击事件处理 ==============
 const handleImageSlide = (dir: ARROW_DIRECTION) => {
-  setCurrentIndex(dir);
+  // 切换之前重置前一个状态
+  resetImageItemStatus(currentIndex.value);
+
+  setCurrentIndexByDir(dir);
   console.log("dir,currentIndex:", dir, currentIndex.value);
 };
-// const
+
+// ============== 控制条事件处理 ==============
+const handleRotate = (rotate: ARROW_DIRECTION) => {
+  setImageItemRotate(currentIndex.value, rotate);
+};
+
+const handleZoom = (zoom: ZOOM) => {
+  setImageItemZoom(currentIndex.value, zoom);
+};
 </script>
 
 <style lang="scss" scoped>
